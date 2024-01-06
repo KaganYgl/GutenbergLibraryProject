@@ -1,0 +1,34 @@
+﻿@model List<BookshelfItem>
+
+<h2>My Bookshelf</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>GutenbergID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Read Link</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.Id</td>
+                <td>@book.GutenbergID</td>
+                <td>@book.Title</td>
+                <td>@book.Author</td>
+                <td><a href="@book.ReadLink" target="_blank">Read</a></td>
+                <td>
+                    <form asp-action="RemoveFromBookshelf" asp-controller="Bookshelf" method="post">
+                        <input type="hidden" name="bookId" value="@book.Id" />
+                        <button type="submit" class="btn btn-danger">Remove</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
